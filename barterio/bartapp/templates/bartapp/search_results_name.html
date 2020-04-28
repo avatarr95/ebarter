@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    .article:hover {background-color: rgb(197, 195, 195);}
+.article:hover h2 {color: green; text-decoration: underline;}
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="last_20_on_the_left" 
+style="width: 750px;
+background-color: white;
+/* float: left; */
+margin: 0 auto;
+padding: 30px 0;">
+        {% for offer in offers %}
+        <a href="{{ offer.get_absolute_url }}">
+            <article class="article" style="color: black;
+            font-size: 0.85em;
+            text-align: justify;
+            line-height: 1.5em;">    
+                <div class="post_image" style="float: left;"><img style="width: 200px;
+                height: 125px;" src="{{ offer.images.first.image.url }}"></div>
+                <div class="post_data" style=" float: left;
+                padding: 5px;
+                width: 500px;
+                word-wrap: break-word;
+                text-align: left;">
+                    <div class="post_header">
+                        <h2>{{ offer.title|title|truncatechars:30 }}</h2>
+                        <i style="font-size: 0.9em;
+                        font-weight: lighter;">{{ offer.date_published|timesince }} by {{ offer.author.username }}</i>
+                    </div>
+                    <div class="post_text" style="width: 500px;
+                    height: 55px;
+                    font-weight: lighter;
+                    text-align: left;
+                    word-wrap: break-word;
+                    height: 75px;">
+                        <p class="post_description_normal">{{ offer.description|safe|truncatechars:40 }}</p>
+                        <!-- <p class="post_description_sm">{{ post.description|truncatechars:30 }}</p> -->
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+                
+            </article>
+        </a>
+        {% endfor %}
+
+</div>
+
+{% endblock %}

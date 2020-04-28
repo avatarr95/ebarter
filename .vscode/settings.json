@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "my_env\\Scripts\\python.exe",
+    "python.jediEnabled": true,
+    "git.ignoreLimitWarning": true
+}

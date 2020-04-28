@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+    <style>
+        #hint_id_username {
+            display: none;
+        }
+
+        .help-block {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block title %}Utwórz konto{% endblock title %}
+
+{% block content %}
+
+<div class="container my-4"
+style="text-align: center;">
+    <div class="row">
+        <h4 class="col col-md-10 my-4 px-0" style="text-align: center; margin: 0 auto; font-weight: bold;">Wypełnij poniższy formularz, aby się zarejestrować </h4>
+        <div class="col col-md-8 col-lg-6 mx-auto">
+            
+            <form action='.' method="post">
+                {{ user_form|crispy }}
+                {% csrf_token %}
+                <input class="btn btn-primary my-4" type="submit" value="Utwórz konto">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="width: 700px; padding: 15px; margin: 0 auto; text-align: center;">
+    <h1 style="display: inline-block">Profil użytkownika {{ user.username }}</h1> 
+    
+    {% if request.user.username == user.username %}
+    <span><a href="{% url 'bartapp:profile_edit' pk=user.pk username=user.username %}">Edytuj</a></span>
+    {% endif %}
+
+    <h2 style="text-align: center; padding: 20px 0">OPIS DZIAŁALNOŚCI</h2>
+    <p>{{ user.profile.company_description|safe }}</p>
+
+    <h2 style="text-align: center; padding: 20px 0">DANE DO PRZELEWU</h2>
+    <p>{{ user.profile.transfer_data|safe }}</p>
+
+    <h2 style="text-align: center; padding: 20px 0">OFERTY</h2>
+
+    {% for offer in user.offers.all %}
+        <a href="{{ offer.get_absolute_url }}"><h5 style="text-align: center; color: black">{{ offer.title }}</h5></a>
+    {% endfor %}
+{% endblock %}
+</div>

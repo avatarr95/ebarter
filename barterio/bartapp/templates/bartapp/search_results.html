@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    .article:hover {background-color: rgb(197, 195, 195);}
+.article:hover h2 {color: green; text-decoration: underline;}
+</style>
+{% endblock %}
+{% block content %}
+
+<!-- <div class="wrapper" style="width: 600px; padding: 20px; margin: 0 auto"></div> -->
+        <!-- {% for offer in offers %}
+            <div class="blog_post" >
+                <img style="height: 100%; width: 100px; margin-top: 10px;" src="{{ offer.images.first.image.url }}" />
+                <a style="text-decoration: none; color: black" href="{{ offer.get_absolute_url }}"><h5 style="display: inline-block; padding:0; margin:0">{{ offer.title }}</h5></a>
+                <i style="font-size: 10px;">Opublikowane przez</i> <b style="font-size: 10px;">{{ offer.author.username }}</b> <i style="font-size: 10px;">on {{ offer.date_published }}</i>
+                <hr>
+                <p>{{ offer.description|safe|truncatechars:40 }}</p>
+            </div>
+        {% endfor %} -->
+        <div id="last_20_on_the_left" 
+        style="width: 750px;
+        background-color: white;
+        /* float: left; */
+        margin: 0 auto;
+        padding: 30px 0px;">
+                {% for offer in offers %}
+                <a href="{{ offer.get_absolute_url }}">
+                    <article class="article" style="color: black;
+                    font-size: 0.85em;
+                    text-align: justify;
+                    line-height: 1.5em;">    
+                        <div class="post_image" style="float: left;"><img style="width: 200px;
+                        height: 125px;" src="{{ offer.images.first.image.url }}"></div>
+                        <div class="post_data" style=" float: left;
+                        padding: 5px;
+                        width: 500px;
+                        word-wrap: break-word;
+                        text-align: left;">
+                            <div class="post_header">
+                                <h2>{{ offer.title|title|truncatechars:30 }}</h2>
+                                <i style="font-size: 0.9em;
+                                font-weight: lighter;">{{ offer.date_published|timesince }} by {{ offer.author.username }}</i>
+                            </div>
+                            <div class="post_text" style="width: 500px;
+                            height: 55px;
+                            font-weight: lighter;
+                            text-align: left;
+                            word-wrap: break-word;
+                            height: 75px;">
+                                <p class="post_description_normal">{{ offer.description|safe|truncatechars:40 }}</p>
+                                <!-- <p class="post_description_sm">{{ post.description|truncatechars:30 }}</p> -->
+                            </div>
+                        </div>
+                        <div style="clear: both"></div>
+                        
+                    </article>
+                </a>
+
+                
+                {% endfor %}
+                
+                <div style="text-align: center">
+                    <span>
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; pierwsza</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">poprzednia</a>
+                        {% endif %}
+        
+                        <span>{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">następna</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">ostatnia &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+ 
+    </div>
+
+
+{% endblock %}
